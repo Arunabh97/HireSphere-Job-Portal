@@ -7,4 +7,5 @@ import jakarta.persistence.Table;
 @Table(name = "skills")
 public class Skills {
 
+	
 }
