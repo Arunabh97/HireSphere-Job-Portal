@@ -13,10 +13,10 @@ import jakarta.persistence.Table;
 public class RecruiterProfile {
 
 	@Id
-	private int userAccount;
+	private int userAccountId;
 	
 	@OneToOne
-	@JoinColumn(name = "useraccount__id")
+	@JoinColumn(name = "user_account_id")
 	@MapsId
 	private Users userId;
 	
@@ -33,10 +33,10 @@ public class RecruiterProfile {
 	public RecruiterProfile() {
 	}
 
-	public RecruiterProfile(int userAccount, Users userId, String firstName, String lastName, String city,
+	public RecruiterProfile(int userAccountId, Users userId, String firstName, String lastName, String city,
 			String state, String country, String company, String profilePhoto) {
 		super();
-		this.userAccount = userAccount;
+		this.userAccountId = userAccountId;
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -47,12 +47,16 @@ public class RecruiterProfile {
 		this.profilePhoto = profilePhoto;
 	}
 
-	public int getUserAccount() {
-		return userAccount;
+	public RecruiterProfile(Users users) {
+		this.userId = users;
+	}
+	
+	public int getUserAccountId() {
+		return userAccountId;
 	}
 
-	public void setUserAccount(int userAccount) {
-		this.userAccount = userAccount;
+	public void setUserAccountId(int userAccountId) {
+		this.userAccountId = userAccountId;
 	}
 
 	public Users getUserId() {
@@ -121,7 +125,7 @@ public class RecruiterProfile {
 
 	@Override
 	public String toString() {
-		return "ReccruiterProfile [userAccount=" + userAccount + ", userId=" + userId + ", firstName=" + firstName
+		return "ReccruiterProfile [userAccountId=" + userAccountId + ", userId=" + userId + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", city=" + city + ", state=" + state + ", country=" + country
 				+ ", company=" + company + ", profilePhoto=" + profilePhoto + "]";
 	}
