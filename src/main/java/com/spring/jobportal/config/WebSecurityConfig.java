@@ -1,12 +1,27 @@
 package com.spring.jobportal.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import com.spring.jobportal.services.CustomUserDetailsService;
 
 @Configuration
 public class WebSecurityConfig {
+
+	private final CustomUserDetailsService customUserDetailsService;
+	
+	@Autowired
+	public WebSecurityConfig(CustomUserDetailsService customUserDetailsService) {
+		super();
+		this.customUserDetailsService = customUserDetailsService;
+	}
 
 	private final String[] publicUrl = {"/",
 			"/global-search/**",
@@ -26,11 +41,29 @@ public class WebSecurityConfig {
 	
 	@Bean
 	protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+		
+		http.authenticationProvider(authenticationProvider());
+		
 		http.authorizeHttpRequests(auth->{
 			auth.requestMatchers(publicUrl).permitAll();
 			auth.anyRequest().authenticated();
 		});
 		
 		return http.build();
+	}
+
+	@Bean
+	public AuthenticationProvider authenticationProvider() {
+		
+		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+		authenticationProvider.setMessageSource(passwordEncoder());
+		authenticationProvider.setUserDetailsService(customUserDetailsService);
+		return authenticationProvider();
+	}
+
+	@Bean
+	public MessageSource passwordEncoder() {
+		
+		return new BCryptPasswordEncoder();
 	}
 }
