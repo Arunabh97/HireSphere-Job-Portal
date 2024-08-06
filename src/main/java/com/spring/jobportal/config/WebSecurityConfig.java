@@ -53,6 +53,7 @@ public class WebSecurityConfig {
 
         http.formLogin(form->form.loginPage("/login").permitAll().successHandler());
         
+        
         return http.build();
     }
 
