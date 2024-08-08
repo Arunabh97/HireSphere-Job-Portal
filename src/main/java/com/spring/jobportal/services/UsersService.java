@@ -72,7 +72,10 @@ public class UsersService {
 				return recruiterProfile;
 			} else {
 				
+				JobSeekerProfile jobSeekerProfile = jobSeekerProfileRepository.findById(userId).orElse(new JobSeekerProfile());
+				return jobSeekerProfile;
 			}
 		}
+		return null;
 	}
 }
