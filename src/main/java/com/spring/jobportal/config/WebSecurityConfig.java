@@ -26,25 +26,20 @@ public class WebSecurityConfig {
         this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
     }
 
-    private final String[] publicUrl = {
-        "/",
-        "/global-search/**",
-        "/register",
-        "/register/**",
-        "/webjars/**",
-        "/resources/**",
-        "/assests/**",
-        "/css/**",
-        "/sumnernote/**",
-        "/js/**",
-        "/*.css",
-        "/*.js",
-        "/*.js.map",
-        "/fonts**",
-        "/favicon.ico",
-        "/resources/**",
-        "/error"
-    };
+    private final String[] publicUrl = {"/",
+            "/global-search/**",
+            "/register",
+            "/register/**",
+            "/webjars/**",
+            "/resources/**",
+            "/assets/**",
+            "/css/**",
+            "/summernote/**",
+            "/js/**",
+            "/*.css",
+            "/*.js",
+            "/*.js.map",
+            "/fonts**", "/favicon.ico", "/resources/**", "/error"};
 
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -75,7 +70,7 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    private PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

@@ -5,7 +5,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import com.spring.jobportal.entity.Users;
 import com.spring.jobportal.repository.UsersRepository;
 import com.spring.jobportal.util.CustomUserDetails;
@@ -22,8 +21,8 @@ public class CustomUserDetailsService implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Users users = usersRepository.findByEmail(username).orElseThrow(()->new UsernameNotFoundException("Could not found user"));
-		return new CustomUserDetails(users);
+		Users user = usersRepository.findByEmail(username).orElseThrow(()-> new UsernameNotFoundException("Could not found user"));
+		return new CustomUserDetails(user);
 	}
 	
 }
