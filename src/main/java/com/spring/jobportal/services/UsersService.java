@@ -50,7 +50,6 @@ public class UsersService {
 		else {
 			jobSeekerProfileRepository.save(new JobSeekerProfile(savedUsers));
 		}
-			
 		return savedUsers;
 	}
 	
