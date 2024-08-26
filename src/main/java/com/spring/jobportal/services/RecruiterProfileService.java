@@ -1,8 +1,11 @@
 package com.spring.jobportal.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.jobportal.entity.RecruiterProfile;
 import com.spring.jobportal.repository.RecruiterProfileRepository;
 
 @Service
