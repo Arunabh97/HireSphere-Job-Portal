@@ -13,24 +13,26 @@ import com.spring.jobportal.services.UsersService;
 @Controller
 public class JobPostActivityController {
 
-	public final UsersService usersService;
+    private final UsersService usersService;
 
-	@Autowired
-	public JobPostActivityController(UsersService usersService) {
-		this.usersService = usersService;
-	}
-	
-	@GetMapping("/dashboard")
-	public String searchJobs(Model model) {
-		
-		Object currentUserProfile = usersService.getCurrentUserProfile();
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		
-		if(!(authentication instanceof AnonymousAuthenticationToken)) {
-			String currentUsername = authentication.getName();
-			model.addAttribute("username", currentUsername);
-		}
-		model.addAttribute("user", currentUserProfile);
-		return "dashboard";
-	}
+    @Autowired
+    public JobPostActivityController(UsersService usersService) {
+        this.usersService = usersService;
+    }
+
+    @GetMapping("/dashboard/")
+    public String searchJobs(Model model) {
+
+        Object currentUserProfile = usersService.getCurrentUserProfile();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUsername = authentication.getName();
+            model.addAttribute("username", currentUsername);
+        }
+
+        model.addAttribute("user", currentUserProfile);
+
+        return "dashboard";
+    }
 }

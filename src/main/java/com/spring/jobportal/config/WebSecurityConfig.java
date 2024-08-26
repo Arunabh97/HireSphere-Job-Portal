@@ -17,9 +17,8 @@ import com.spring.jobportal.services.CustomUserDetailsService;
 public class WebSecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
-
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
-    
+
     @Autowired
     public WebSecurityConfig(CustomUserDetailsService customUserDetailsService, CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) {
         this.customUserDetailsService = customUserDetailsService;
@@ -43,6 +42,7 @@ public class WebSecurityConfig {
 
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http.authenticationProvider(authenticationProvider());
 
         http.authorizeHttpRequests(auth -> {
@@ -50,19 +50,20 @@ public class WebSecurityConfig {
             auth.anyRequest().authenticated();
         });
 
-        http.formLogin(form -> form.loginPage("/login").permitAll()
-        		.successHandler(customAuthenticationSuccessHandler))
-        	.logout(logout -> {
-        		logout.logoutUrl("/logout");
-        		logout.logoutSuccessUrl("/");
-        	}).cors(Customizer.withDefaults())
-        	.csrf(csrf->csrf.disable());
-        
+        http.formLogin(form->form.loginPage("/login").permitAll()
+                .successHandler(customAuthenticationSuccessHandler))
+                .logout(logout-> {
+                    logout.logoutUrl("/logout");
+                    logout.logoutSuccessUrl("/");
+                }).cors(Customizer.withDefaults())
+                .csrf(csrf->csrf.disable());
+
         return http.build();
     }
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
+
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         authenticationProvider.setUserDetailsService(customUserDetailsService);
@@ -70,7 +71,7 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    private PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }
