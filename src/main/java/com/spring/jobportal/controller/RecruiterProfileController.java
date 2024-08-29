@@ -14,14 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.util.StringUtils;
 import com.spring.jobportal.entity.RecruiterProfile;
 import com.spring.jobportal.entity.Users;
 import com.spring.jobportal.repository.UsersRepository;
 import com.spring.jobportal.services.RecruiterProfileService;
 import com.spring.jobportal.util.FileUploadUtil;
 
-import io.micrometer.common.util.StringUtils;
 
 @Controller
 @RequestMapping("/recruiter-profile")
