@@ -1,7 +1,8 @@
 package com.spring.jobportal.controller;
 
-import java.util.Date;
-
+import java.util.*;
+import com.spring.jobportal.entity.RecruiterJobsDto;
+import com.spring.jobportal.entity.RecruiterProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -10,12 +11,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.spring.jobportal.entity.JobPostActivity;
 import com.spring.jobportal.entity.Users;
 import com.spring.jobportal.services.JobPostActivityService;
 import com.spring.jobportal.services.UsersService;
+import java.util.List;
+import java.util.List;
 
 @Controller
 public class JobPostActivityController {
@@ -67,5 +71,14 @@ public class JobPostActivityController {
         model.addAttribute("jobPostActivity", jobPostActivity);
         jobPostActivityService.addNew(jobPostActivity);
         return "redirect:/dashboard/";
+    }
+    
+    @PostMapping("dashboard/edit/{id}")
+    public String editJob(@PathVariable("id") int id, Model model) {
+
+        JobPostActivity jobPostActivity = jobPostActivityService.getOne(id);
+        model.addAttribute("jobPostActivity", jobPostActivity);
+        model.addAttribute("user", usersService.getCurrentUserProfile());
+        return "add-jobs";
     }
 }
