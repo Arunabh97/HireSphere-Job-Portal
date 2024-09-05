@@ -13,77 +13,77 @@ import jakarta.persistence.Table;
 @Table(name = "skills")
 public class Skills {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
-	private String name;
-	
-	private String experience;
-	
-	private String yearsOfExperience;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "job_seeker_profile")
-	private JobSeekerProfile jobSeekerProfile;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	public Skills() {
-		
-	}
+    private String name;
+    private String experienceLevel;
+    private String yearsOfExperience;
 
-	public Skills(int id, String name, String experience, String yearsOfExperience, JobSeekerProfile jobSeekerProfile) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.experience = experience;
-		this.yearsOfExperience = yearsOfExperience;
-		this.jobSeekerProfile = jobSeekerProfile;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "job_seeker_profile")
+    private JobSeekerProfile jobSeekerProfile;
 
-	public int getId() {
-		return id;
-	}
+    public Skills() {
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public Skills(Integer id, String name, String experienceLevel, String yearsOfExperience, JobSeekerProfile jobSeekerProfile) {
+        this.id = id;
+        this.name = name;
+        this.experienceLevel = experienceLevel;
+        this.yearsOfExperience = yearsOfExperience;
+        this.jobSeekerProfile = jobSeekerProfile;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getExperience() {
-		return experience;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setExperience(String experience) {
-		this.experience = experience;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getYearsOfExperience() {
-		return yearsOfExperience;
-	}
+    public String getExperienceLevel() {
+        return experienceLevel;
+    }
 
-	public void setYearsOfExperience(String yearsOfExperience) {
-		this.yearsOfExperience = yearsOfExperience;
-	}
+    public void setExperienceLevel(String experienceLevel) {
+        this.experienceLevel = experienceLevel;
+    }
 
-	public JobSeekerProfile getJobSeekerProfile() {
-		return jobSeekerProfile;
-	}
+    public String getYearsOfExperience() {
+        return yearsOfExperience;
+    }
 
-	public void setJobSeekerProfile(JobSeekerProfile jobSeekerProfile) {
-		this.jobSeekerProfile = jobSeekerProfile;
-	}
+    public void setYearsOfExperience(String yearsOfExperience) {
+        this.yearsOfExperience = yearsOfExperience;
+    }
 
-	@Override
-	public String toString() {
-		return "Skills [id=" + id + ", name=" + name + ", experience=" + experience + ", yearsOfExperience="
-				+ yearsOfExperience + ", jobSeekerProfile=" + jobSeekerProfile + "]";
-	}
-	
+    public JobSeekerProfile getJobSeekerProfile() {
+        return jobSeekerProfile;
+    }
+
+    public void setJobSeekerProfile(JobSeekerProfile jobSeekerProfile) {
+        this.jobSeekerProfile = jobSeekerProfile;
+    }
+
+    @Override
+    public String toString() {
+        return "Skills{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", experienceLevel='" + experienceLevel + '\'' +
+                ", yearsOfExperience='" + yearsOfExperience + '\'' +
+                ", jobSeekerProfile=" + jobSeekerProfile +
+                '}';
+    }
 }
