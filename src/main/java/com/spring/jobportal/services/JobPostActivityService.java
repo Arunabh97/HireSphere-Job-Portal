@@ -1,11 +1,10 @@
 package com.spring.jobportal.services;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Objects;
 import org.springframework.stereotype.Service;
-
 import com.spring.jobportal.entity.IRecruiterJobs;
 import com.spring.jobportal.entity.JobCompany;
 import com.spring.jobportal.entity.JobLocation;
@@ -42,8 +41,16 @@ public class JobPostActivityService {
 
     }
 
-	public JobPostActivity getOne(int id) {
-		
-		return jobPostActivityRepository.findById(id).orElseThrow(()->new RuntimeException("Job not found"));
-	}
+    public JobPostActivity getOne(int id) {
+        return jobPostActivityRepository.findById(id).orElseThrow(()->new RuntimeException("Job not found"));
+    }
+
+    public List<JobPostActivity> getAll() {
+        return jobPostActivityRepository.findAll();
+    }
+
+    public List<JobPostActivity> search(String job, String location, List<String> type, List<String> remote, LocalDate searchDate) {
+        return Objects.isNull(searchDate) ? jobPostActivityRepository.searchWithoutDate(job, location, remote,type) :
+                jobPostActivityRepository.search(job, location, remote, type, searchDate);
+    }
 }
